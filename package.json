@@ -1,0 +1,12 @@
+{
+  "name": "kmmcf",
+  "version": "0.0.0",
+  "description": "KaMe MCU Common Framework",
+  "author": "KaMeTang <kametang@umkmtw.org>",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  }
+}
