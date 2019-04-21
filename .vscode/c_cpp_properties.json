@@ -1,0 +1,18 @@
+{
+  "env": {
+    "includePath": ["${workspaceFolder}/Include", "${workspaceFolder}/Config"]
+  },
+  "configurations": [
+    {
+      "name": "DEV_HT32F52241",
+      "includePath": ["${includePath}"],
+      "defines": ["HT32F52241"],
+      "windowsSdkVersion": "10.0.17134.0",
+      "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/VC/Tools/MSVC/14.15.26726/bin/Hostx64/x64/cl.exe",
+      "cStandard": "c99",
+      "cppStandard": "c++11",
+      "intelliSenseMode": "msvc-x64"
+    }
+  ],
+  "version": 4
+}
