@@ -22,22 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef KMMCF_CONFIG_H
-#define KMMCF_CONFIG_H
+#ifndef KMMCF_ASSERT_H
+#define KMMCF_ASSERT_H
 
-//
-// '##::::'##::'######::'##::::'##:
-//  ###::'###:'##... ##: ##:::: ##:
-//  ####'####: ##:::..:: ##:::: ##:
-//  ## ### ##: ##::::::: ##:::: ##:
-//  ##. #: ##: ##::::::: ##:::: ##:
-//  ##:.:: ##: ##::: ##: ##:::: ##:
-//  ##:::: ##:. ######::. #######::
-// ..:::::..:::......::::.......:::
-//
+namespace kmmcf
+{
+#if defined(DEBUG)
+    ///
+    /// Assertion condition is true
+    /// @param cond condition
+    /// @attention activeted when 'DEBUG' defined
+    static inline void Assert(bool cond = false)
+    {
+        if (!cond)
+        {
+            /** force trigger hardfault */
+            *(int*) 0xFFFFFFFF = 0;
+        }
+    }
+#else
+#define Assert(...)
+#endif
+}    // namespace kmmcf
 
-#define __MCU_EXTERNAL (0)                  /*!< Defined External/IDE */
-#define __MCU_HT32F52241 (0x00000000 | 0x1) /*!< HT32F52241 */
-#define __MCU_HT32F52231 (0x00000000 | 0x2) /*!< HT32F52231 */
 
-#endif /* KMMCF_CONFIG_H */
+#endif /* KMMCF_ASSERT_H */

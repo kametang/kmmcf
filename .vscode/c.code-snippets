@@ -40,8 +40,8 @@
       "#endif /* KMMCF_${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H */"
     ]
   },
-  "Entry Doxygen": {
-    "prefix": "en",
-    "body": "/*!< $1 */"
+  "Comment": {
+    "prefix": "/",
+    "body": "/** $0 */"
   }
 }

@@ -25,12 +25,7 @@
 #ifndef KMMCF_ARCH_DEF_H
 #define KMMCF_ARCH_DEF_H
 
-#include <kmmcf_conf.h>
-
-/**
- * Check compile error when no specific or not supported MCU
- *
- */
+// Check for not supported MCU
 #define NO_MCU
 
 #endif /* KMMCF_ARCH_DEF_H */

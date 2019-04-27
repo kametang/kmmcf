@@ -25,8 +25,4 @@
 #ifndef KMMCF_CONF_H
 #define KMMCF_CONF_H
 
-#include <kmmcf/config.h>
-
-#define CFG_MCU (__MCU_EXTERNAL) /*!< Choosed MCU */
-
 #endif /* KMMCF_CONF_H */

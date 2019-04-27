@@ -1,8 +1,17 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "C_Cpp.commentContinuationPatterns": ["/**", "/// "],
+    "doxdocgen.c.firstLine": "/// ",
+    "doxdocgen.c.lastLine": "///",
+    "doxdocgen.c.commentPrefix": "/// ",
+    "[cpp]": {
+      "editor.showFoldingControls": "always",
+      "editor.foldingStrategy": "indentation"
+    }
+  }
 }

@@ -22,9 +22,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef KMMCF_ARCH_STM_H
-#define KMMCF_ARCH_STM_H
+#include <kmmcf/arch/arch.h>
 
-#include "arch_def.h"
+// :'######::'##::::'##:'########::'######::'##:::'##:
+// '##... ##: ##:::: ##: ##.....::'##... ##: ##::'##::
+//  ##:::..:: ##:::: ##: ##::::::: ##:::..:: ##:'##:::
+//  ##::::::: #########: ######::: ##::::::: #####::::
+//  ##::::::: ##.... ##: ##...:::: ##::::::: ##. ##:::
+//  ##::: ##: ##:::: ##: ##::::::: ##::: ##: ##:. ##::
+// . ######:: ##:::: ##: ########:. ######:: ##::. ##:
+// :......:::..:::::..::........:::......:::..::::..::
 
-#endif /* KMMCF_ARCH_STM_H */
+#if defined(NO_MCU)
+#error Not supported MCU
+#endif

@@ -27,28 +27,24 @@
 #define KMMCF_INFORMATION_H
 
 
-/**
- * Name of KaMe MCU Common Framework
- *
- */
+///
+/// Name of KaMe MCU Common Framework
+///
 #define KMMCF_NAME "KMMCF"
 
-/**
- * Major version of KaMe MCU Common Framework
- *
- */
+///
+/// Major version of KaMe MCU Common Framework
+///
 #define KMMCF_VER_MAJOR (0)
 
-/**
- * Minor version of KaMe MCU Common Framework
- *
- */
+///
+/// Minor version of KaMe MCU Common Framework
+///
 #define KMMCF_VER_MINOR (1)
 
-/**
- * Patch version of KaMe MCU Common Framework
- *
- */
+///
+/// Patch version of KaMe MCU Common Framework
+///
 #define KMMCF_VER_PATCH (0)
 
 #endif /* KMMCF_INFORMATION_H */
