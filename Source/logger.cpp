@@ -24,66 +24,72 @@
  */
 #include <kmmcf/logger.h>
 
-// :'######:::'##::::::::'#######::'########:::::'###::::'##:::::::
-// '##... ##:: ##:::::::'##.... ##: ##.... ##:::'## ##::: ##:::::::
-//  ##:::..::: ##::::::: ##:::: ##: ##:::: ##::'##:. ##:: ##:::::::
-//  ##::'####: ##::::::: ##:::: ##: ########::'##:::. ##: ##:::::::
-//  ##::: ##:: ##::::::: ##:::: ##: ##.... ##: #########: ##:::::::
-//  ##::: ##:: ##::::::: ##:::: ##: ##:::: ##: ##.... ##: ##:::::::
-// . ######::: ########:. #######:: ########:: ##:::: ##: ########:
-// :......::::........:::.......:::........:::..:::::..::........::
-
-kmmcf::Logger::_::Option_t kmmcf::Logger::Config(0xFFFFFFFF);
-kmmcf::Logger::Logger_t    kmmcf::Log(0xFFFFFFFF);
-
-// '##::::::::'#######:::'######::::'######:::'########:'########::
-//  ##:::::::'##.... ##:'##... ##::'##... ##:: ##.....:: ##.... ##:
-//  ##::::::: ##:::: ##: ##:::..::: ##:::..::: ##::::::: ##:::: ##:
-//  ##::::::: ##:::: ##: ##::'####: ##::'####: ######::: ########::
-//  ##::::::: ##:::: ##: ##::: ##:: ##::: ##:: ##...:::: ##.. ##:::
-//  ##::::::: ##:::: ##: ##::: ##:: ##::: ##:: ##::::::: ##::. ##::
-//  ########:. #######::. ######:::. ######::: ########: ##:::. ##:
-// ........:::.......::::......:::::......::::........::..:::::..::
-void kmmcf::Logger::Logger_t::Log(Level level, const char *format, va_list args)
+namespace kmmcf
 {
-    using _::OPT_EN;
-    uint32_t options = Config.options & this->options;
-
-    if ((options & OPT_EN) && (options & level))
+    namespace Logger
     {
-        vprintf(format, args);
-        printf("\r\n");
-    }
-}
+        // :'######:::'##::::::::'#######::'########:::::'###::::'##:::::::
+        // '##... ##:: ##:::::::'##.... ##: ##.... ##:::'## ##::: ##:::::::
+        //  ##:::..::: ##::::::: ##:::: ##: ##:::: ##::'##:. ##:: ##:::::::
+        //  ##::'####: ##::::::: ##:::: ##: ########::'##:::. ##: ##:::::::
+        //  ##::: ##:: ##::::::: ##:::: ##: ##.... ##: #########: ##:::::::
+        //  ##::: ##:: ##::::::: ##:::: ##: ##:::: ##: ##.... ##: ##:::::::
+        // . ######::: ########:. #######:: ########:: ##:::: ##: ########:
+        // :......::::........:::.......:::........:::..:::::..::........::
 
-void kmmcf::Logger::Logger_t::Error(const char *format, ...)
-{
-    va_list args;
-    va_start(args, format);
-    this->Log(Level::ERR, format, args);
-    va_end(args);
-}
+        _::Option_t Config(0xFFFFFFFF);
+        Logger_t    Log(0xFFFFFFFF);
 
-void kmmcf::Logger::Logger_t::Crit(const char *format, ...)
-{
-    va_list args;
-    va_start(args, format);
-    this->Log(Level::CRIT, format, args);
-    va_end(args);
-}
+        // '##::::::::'#######:::'######::::'######:::'########:'########::
+        //  ##:::::::'##.... ##:'##... ##::'##... ##:: ##.....:: ##.... ##:
+        //  ##::::::: ##:::: ##: ##:::..::: ##:::..::: ##::::::: ##:::: ##:
+        //  ##::::::: ##:::: ##: ##::'####: ##::'####: ######::: ########::
+        //  ##::::::: ##:::: ##: ##::: ##:: ##::: ##:: ##...:::: ##.. ##:::
+        //  ##::::::: ##:::: ##: ##::: ##:: ##::: ##:: ##::::::: ##::. ##::
+        //  ########:. #######::. ######:::. ######::: ########: ##:::. ##:
+        // ........:::.......::::......:::::......::::........::..:::::..::
 
-void kmmcf::Logger::Logger_t::Info(const char *format, ...)
-{
-    va_list args;
-    va_start(args, format);
-    this->Log(Level::INFO, format, args);
-    va_end(args);
-}
+        void Logger_t::Log(Level level, const char *format, va_list args)
+        {
+            uint32_t options = Config.options & this->options;
 
-void kmmcf::Logger::Logger_t::Debug(const char *format, ...)
-{
-    va_list args;
-    va_start(args, format);
-    this->Log(Level::DBG, format, args);
-    va_end(args);
-}
+            if ((options & _::OPT_EN) && (options & level))
+            {
+                vprintf(format, args);
+                printf("\r\n");
+            }
+        }
+
+        void Logger_t::Error(const char *format, ...)
+        {
+            va_list args;
+            va_start(args, format);
+            this->Log(Level::ERR, format, args);
+            va_end(args);
+        }
+
+        void Logger_t::Crit(const char *format, ...)
+        {
+            va_list args;
+            va_start(args, format);
+            this->Log(Level::CRIT, format, args);
+            va_end(args);
+        }
+
+        void Logger_t::Info(const char *format, ...)
+        {
+            va_list args;
+            va_start(args, format);
+            this->Log(Level::INFO, format, args);
+            va_end(args);
+        }
+
+        void Logger_t::Debug(const char *format, ...)
+        {
+            va_list args;
+            va_start(args, format);
+            this->Log(Level::DBG, format, args);
+            va_end(args);
+        }
+    }    // namespace Logger
+}    // namespace kmmcf
