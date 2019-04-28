@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <kmmcf/assert.h>
 #include <kmmcf/logger.h>
 
 namespace kmmcf
@@ -51,6 +52,8 @@ namespace kmmcf
 
         void Logger_t::Log(Level level, const char *format, va_list args)
         {
+            Assert(format);
+
             uint32_t options = Config.options & this->options;
 
             if ((options & _::OPT_EN) && (options & level))

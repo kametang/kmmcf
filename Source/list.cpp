@@ -38,46 +38,37 @@ namespace kmmcf
             //  ##:::: ##: ##.... ##:'##::: ##: ##:::::::
             //  ########:: ##:::: ##:. ######:: ########:
             // ........:::..:::::..:::......:::........::
-            template<class T> void List_Base_t<T>::insertHead(List_Base_t *node)
+            void List_Base_t::insertHead(List_Base_t &node)
             {
                 if (this->isFree())
                 {
-                    node->next         = this->next;
-                    node->prev         = this;
-                    (node->next)->prev = node;
-                    this->next         = node;
+                    node.next       = this->next;
+                    node.prev       = this;
+                    node.next->prev = &node;
+                    this->next      = &node;
                 }
             }
 
-            template<class T> void List_Base_t<T>::insertTail(List_Base_t *node)
+            void List_Base_t::insertTail(List_Base_t &node)
             {
                 if (this->isFree())
                 {
-                    node->next         = this;
-                    node->prev         = this->prev;
-                    (node->prev)->next = node;
-                    this->prev         = node;
+                    node.next       = this;
+                    node.prev       = this->prev;
+                    node.prev->next = &node;
+                    this->prev      = &node;
+                }
+            }
+
+            void List_Base_t::free(void)
+            {
+                if (!this->isFree())
+                {
+                    this->prev->next = this->next;
+                    this->next->prev = this->prev;
+                    this->prev       = this;
                 }
             }
         }    // namespace _
-
-        // '##::: ##::'#######::'########::'########:
-        //  ###:: ##:'##.... ##: ##.... ##: ##.....::
-        //  ####: ##: ##:::: ##: ##:::: ##: ##:::::::
-        //  ## ## ##: ##:::: ##: ##:::: ##: ######:::
-        //  ##. ####: ##:::: ##: ##:::: ##: ##...::::
-        //  ##:. ###: ##:::: ##: ##:::: ##: ##:::::::
-        //  ##::. ##:. #######:: ########:: ########:
-        // ..::::..:::.......:::........:::........::
-
-        template<class T> void Node_t<T>::Free(void)
-        {
-            if (!this->isFree())
-            {
-                this->prev->next = this->next;
-                this->next->prev = this->prev;
-                this->prev       = this;
-            }
-        }
-    }    // namespace List
+    }        // namespace List
 }    // namespace kmmcf

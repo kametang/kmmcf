@@ -6,7 +6,7 @@
     {
       "name": "DEV_HT32F52241",
       "includePath": ["${includePath}"],
-      "defines": ["HT32F52241", "DEBUG"],
+      "defines": ["HT32F52241", "DEBUG", "__GNUC__", "THREAD_TIMEOUT=1"],
       "windowsSdkVersion": "10.0.17134.0",
       "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/VC/Tools/MSVC/14.15.26726/bin/Hostx64/x64/cl.exe",
       "cStandard": "c99",

@@ -32,6 +32,11 @@ namespace kmmcf
     ///
     namespace List
     {
+        // prototype
+
+        template<class T> class List_t;
+        template<class T> class Node_t;
+
         ///
         /// hidden
         ///
@@ -39,26 +44,31 @@ namespace kmmcf
         {
             ///
             /// Base of list
-            /// @tparam T final type of node
             ///
-            template<class T> class List_Base_t
+            class List_Base_t
             {
-                private:
-                T *prev;
-                T *next;
-
                 protected:
+                ///
+                /// Prev node
+                ///
+                List_Base_t *prev;
+
+                ///
+                /// Next node
+                ///
+                List_Base_t *next;
+
                 ///
                 /// Insert node to next of current
                 /// @param node node
                 ///
-                void insertHead(List_Base_t *node);
+                void insertHead(List_Base_t &node);
 
                 ///
                 /// Insert node to prev of current
                 /// @param node node
                 ///
-                void insertTail(List_Base_t *node);
+                void insertTail(List_Base_t &node);
 
                 ///
                 /// Is node free?
@@ -69,6 +79,11 @@ namespace kmmcf
                 {
                     return this->prev == this;
                 }
+
+                ///
+                /// Free node
+                ///
+                void free(void);
 
                 public:
                 ///
@@ -81,15 +96,17 @@ namespace kmmcf
                 }
             };    // class List_Base_t
 
+
         }    // namespace _
+
 
         ///
         /// Node object
-        /// @tparam T final type for node
+        /// @tparam T type of final node
         ///
-        template<class T> class Node_t : private _::List_Base_t<T>
+        template<class T> class Node_t : protected _::List_Base_t
         {
-            friend class List_t<T>;
+            friend class List_t;
 
             public:
             ///
@@ -98,65 +115,20 @@ namespace kmmcf
             Node_t(void) : List_Base_t() {}
 
             ///
-            /// Get next of node
-            /// @return node
+            /// Get next object
+            /// @return
             ///
-            T *GetNext(void)
+            T *__GetNext(void)
             {
-                return this->next;
-            }
-
-            ///
-            /// Get prev of node
-            /// @return node
-            ///
-            T *GetPrev(void)
-            {
-                return this->prev;
-            }
-
-            ///
-            /// Is node free?
-            /// @return [true] node is free
-            /// @return [false] node is belong to a list
-            ///
-            bool IsFree(void)
-            {
-                return this->isFree();
-            }
-
-            ///
-            /// Free node object
-            ///
-            /// delete node from current list
-            ///
-            void Free(void);
-
-            ///
-            /// Insert a node to next of this
-            /// @param node node
-            ///
-            void InsertNext(Node_t &node)
-            {
-                this->insertHead(node);
-            }
-
-            ///
-            /// Insert a node to prev of this
-            /// @param node node
-            ///
-            void InsertPrev(Node_t &node)
-            {
-                this->insertTail(node);
+                return (T *) this->next;
             }
         };
 
-
         ///
         /// List object
-        /// @tparam T final type for node
+        /// @tparam T type of final node
         ///
-        template<class T> class List_t : private _::List_Base_t<T>
+        template<class T> class List_t : protected _::List_Base_t
         {
             public:
             ///
@@ -170,8 +142,9 @@ namespace kmmcf
             ///
             T *GetHead(void)
             {
-                return this->next;
+                return (T *) this->next;
             }
+
 
             ///
             /// Get last node of list
@@ -179,8 +152,9 @@ namespace kmmcf
             ///
             T *GetLast(void)
             {
-                return this->prev;
+                return (T *) this->prev;
             }
+
 
             ///
             /// Is list empty?
@@ -196,18 +170,30 @@ namespace kmmcf
             /// Insert node as first element of list
             /// @param node node
             ///
-            void InsertHead(Node_t &node)
+            void InsertHead(T &node)
             {
                 this->insertHead(node);
             }
+
 
             ///
             /// Insert node as last element of list
             /// @param node node
             ///
-            void InsertTail(Node_t &node)
+            void InsertTail(T &node)
             {
                 this->insertTail(node);
+            }
+
+            ///
+            /// Is list end
+            /// @param node node object
+            /// @return [true] end
+            /// @return [false] not end
+            ///
+            bool __IsEnd(T *node)
+            {
+                return this == node;
             }
         };
 
@@ -221,6 +207,6 @@ namespace kmmcf
 /// @param list list object
 ///
 #define LIST_FOREACH(iter, list)                                                                   \
-    for ((iter) = (list).GetHead(); (iter) != &(list); (iter) = (iter)->GetNext())
+    for ((iter) = (list).GetHead(); list.__IsEnd(iter); (iter) = (iter)->__GetNext())
 
 #endif /* KMMCF_LIST_H */
